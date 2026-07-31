@@ -1,25 +1,31 @@
+import { NavLink } from "react-router-dom";
+
+import "./Sidebar.css";
+
+import menuItems from "../../config/menu";
+
 function Sidebar() {
   return (
-    <aside
-      style={{
-        width: "240px",
-        background: "#1f2937",
-        color: "white",
-        padding: "20px",
-        minHeight: "100vh",
-      }}
-    >
-      <h2>MT Commerce</h2>
+    <aside className="sidebar">
+      <h2 className="sidebar-title">MT Commerce</h2>
 
-      <hr />
+      <hr className="sidebar-divider" />
 
-      <p>📊 Dashboard</p>
-      <p>📦 Productos</p>
-      <p>👥 Clientes</p>
-      <p>🛒 Ventas</p>
-      <p>🚚 Compras</p>
-      <p>📈 Reportes</p>
-      <p>⚙ Configuración</p>
+      <nav>
+        {menuItems.map((item) => (
+          <NavLink
+            key={item.path}
+            to={item.path}
+            style={{
+              display: "block",
+              color: "white",
+              padding: "10px 0",
+            }}
+          >
+            {item.icon} {item.label}
+          </NavLink>
+        ))}
+      </nav>
     </aside>
   );
 }

@@ -1,0 +1,25 @@
+.sidebar {
+  width: var(--sidebar-width);
+  min-height: calc(100vh - var(--header-height));
+
+  background-color: var(--color-secondary);
+  color: white;
+
+  padding: 20px;
+
+  box-shadow: var(--shadow-sm);
+}
+
+.sidebar-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+
+  margin-bottom: 20px;
+}
+
+.sidebar-divider {
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+
+  margin-bottom: 20px;
+}

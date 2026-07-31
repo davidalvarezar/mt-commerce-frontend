@@ -1,0 +1,14 @@
+.product-form-page {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.product-form-header h1 {
+  margin: 0;
+}
+
+.product-form-header p {
+  margin-top: 8px;
+  color: var(--color-text-light);
+}

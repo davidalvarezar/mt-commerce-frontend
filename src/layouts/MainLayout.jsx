@@ -1,25 +1,20 @@
+import { Outlet } from "react-router-dom";
+
 import Header from "../components/layout/Header";
 import Sidebar from "../components/layout/Sidebar";
 
-function MainLayout({ children }) {
+import "./MainLayout.css";
+
+function MainLayout() {
   return (
     <>
       <Header />
 
-      <div
-        style={{
-          display: "flex",
-        }}
-      >
+      <div className="main-layout">
         <Sidebar />
 
-        <main
-          style={{
-            flex: 1,
-            padding: "30px",
-          }}
-        >
-          {children}
+        <main className="main-content">
+          <Outlet />
         </main>
       </div>
     </>

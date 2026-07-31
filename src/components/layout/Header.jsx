@@ -1,13 +1,9 @@
+import "./Header.css";
+
 function Header() {
   return (
-    <header
-      style={{
-        background: "#ffffff",
-        borderBottom: "1px solid #ddd",
-        padding: "18px 30px",
-      }}
-    >
-      <h2>MT Commerce</h2>
+    <header className="header">
+      <h2 className="header-title">MT Commerce</h2>
     </header>
   );
 }

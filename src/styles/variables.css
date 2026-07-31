@@ -1,0 +1,38 @@
+:root {
+  /* Colores principales */
+  --color-primary: #2563eb;
+  --color-primary-hover: #1d4ed8;
+
+  /* Colores secundarios */
+  --color-secondary: #1e293b;
+
+  /* Estados */
+  --color-success: #22c55e;
+  --color-warning: #f59e0b;
+  --color-danger: #ef4444;
+
+  /* Fondos */
+  --color-background: #f5f7fb;
+  --color-surface: #ffffff;
+
+  /* Texto */
+  --color-text: #1f2937;
+  --color-text-light: #6b7280;
+
+  /* Bordes */
+  --color-border: #d1d5db;
+
+  /* Layout */
+  --sidebar-width: 260px;
+  --header-height: 70px;
+
+  /* Bordes */
+  --border-radius: 8px;
+
+  /* Sombras */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.12);
+
+  /* Tipografía */
+  --font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}

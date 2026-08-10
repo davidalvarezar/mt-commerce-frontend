@@ -4,6 +4,8 @@ import { createProduct } from "../../../services/productService";
 import Button from "../../../components/common/Button/Button";
 import Input from "../../../components/common/Input/Input";
 import Select from "../../../components/common/Select/Select";
+import Card from "../../../components/common/Card/Card";
+import "./ProductForm.css";
 
 function ProductForm() {
   const navigate = useNavigate();
@@ -139,87 +141,77 @@ function ProductForm() {
   };
 
   return (
-    <div>
-      <h2>Nuevo Producto</h2>
+    <Card>
+      <div className="product-form">
+        {successMessage && (
+          <div className="product-form-message">
+            {successMessage}
+          </div>
+        )}
 
-      {successMessage && (
-        <p
-          style={{
-            color: "green",
-            marginBottom: "20px",
-            fontWeight: "bold",
-          }}
-        >
-          {successMessage}
-        </p>
-      )}
+        <form onSubmit={handleSubmit}>
+          <div className="product-form-fields">
+            <Input
+              label="Nombre"
+              name="nombre"
+              value={formData.nombre}
+              onChange={handleChange}
+              required
+              error={errors.nombre}
+            />
 
-      <form onSubmit={handleSubmit}>
-        <Input
-          label="Nombre"
-          name="nombre"
-          value={formData.nombre}
-          onChange={handleChange}
-          required
-          error={errors.nombre}
-        />
+            <Select
+              label="Tipo"
+              name="tipo"
+              value={formData.tipo}
+              onChange={handleChange}
+              options={[
+                {
+                  value: "PRODUCTO",
+                  label: "Producto",
+                },
+                {
+                  value: "SERVICIO",
+                  label: "Servicio",
+                },
+              ]}
+              required
+              error={errors.tipo}
+            />
 
-        <Select
-          label="Tipo"
-          name="tipo"
-          value={formData.tipo}
-          onChange={handleChange}
-          options={[
-            {
-              value: "PRODUCTO",
-              label: "Producto",
-            },
-            {
-              value: "SERVICIO",
-              label: "Servicio",
-            },
-          ]}
-          required
-          error={errors.tipo}
-        />
+            <Input
+              label="Precio Costo"
+              name="precioCosto"
+              type="number"
+              value={formData.precioCosto}
+              onChange={handleChange}
+              required
+              error={errors.precioCosto}
+            />
 
-        <Input
-          label="Precio Costo"
-          name="precioCosto"
-          type="number"
-          value={formData.precioCosto}
-          onChange={handleChange}
-          required
-          error={errors.precioCosto}
-        />
+            <Input
+              label="Precio Venta"
+              name="precioVenta"
+              type="number"
+              value={formData.precioVenta}
+              onChange={handleChange}
+              required
+              error={errors.precioVenta}
+            />
+          </div>
 
-        <Input
-          label="Precio Venta"
-          name="precioVenta"
-          type="number"
-          value={formData.precioVenta}
-          onChange={handleChange}
-          required
-          error={errors.precioVenta}
-        />
+          <div className="product-form-actions">
+            <Button type="button" onClick={handleCancel}>
+              Cancelar
+            </Button>
 
-        <div
-          style={{
-            display: "flex",
-            gap: "10px",
-            marginTop: "20px",
-          }}
-        >
-          <Button type="submit">
-            Guardar
-          </Button>
-
-          <Button type="button" onClick={handleCancel}>
-            Cancelar
-          </Button>
-        </div>
-      </form>
-    </div>
+            <Button type="submit">
+              Guardar
+            </Button>
+          </div>
+        </form>
+      </div>
+    </Card>
   );
 }
 

@@ -15,6 +15,13 @@ function ProductForm() {
     precioVenta: "",
   });
 
+  const [errors, setErrors] = useState({
+    nombre: "",
+    tipo: "",
+    precioCosto: "",
+    precioVenta: "",
+  });
+
   const [successMessage, setSuccessMessage] = useState("");
 
   const handleChange = (e) => {
@@ -24,10 +31,95 @@ function ProductForm() {
       ...prev,
       [name]: value,
     }));
+
+    if (name === "nombre" && value.trim() !== "") {
+      setErrors((prev) => ({
+        ...prev,
+        nombre: "",
+      }));
+    }
+
+    if (name === "tipo" && value !== "") {
+      setErrors((prev) => ({
+        ...prev,
+        tipo: "",
+      }));
+    }
+
+    if (
+      name === "precioCosto" &&
+      value !== "" &&
+      Number(value) >= 0
+    ) {
+      setErrors((prev) => ({
+        ...prev,
+        precioCosto: "",
+      }));
+    }
+
+    if (name === "precioVenta" && value !== "") {
+      const precioVenta = Number(value);
+      const precioCosto = Number(formData.precioCosto);
+
+      if (
+        precioVenta >= 0 &&
+        !Number.isNaN(precioCosto) &&
+        precioVenta >= precioCosto
+      ) {
+        setErrors((prev) => ({
+          ...prev,
+          precioVenta: "",
+        }));
+      }
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const newErrors = {
+      nombre: "",
+      tipo: "",
+      precioCosto: "",
+      precioVenta: "",
+    };
+
+    if (formData.nombre.trim() === "") {
+      newErrors.nombre = "El nombre es obligatorio.";
+    }
+
+    if (formData.tipo === "") {
+      newErrors.tipo = "El tipo es obligatorio.";
+    }
+
+    if (formData.precioCosto === "") {
+      newErrors.precioCosto = "El precio de costo es obligatorio.";
+    } else if (Number(formData.precioCosto) < 0) {
+      newErrors.precioCosto =
+        "El precio de costo no puede ser negativo.";
+    }
+
+    if (formData.precioVenta === "") {
+      newErrors.precioVenta = "El precio de venta es obligatorio.";
+    } else if (Number(formData.precioVenta) < 0) {
+      newErrors.precioVenta =
+        "El precio de venta no puede ser negativo.";
+    } else if (
+      Number(formData.precioVenta) < Number(formData.precioCosto)
+    ) {
+      newErrors.precioVenta =
+        "El precio de venta no puede ser menor al precio de costo.";
+    }
+
+    if (
+      newErrors.nombre ||
+      newErrors.tipo ||
+      newErrors.precioCosto ||
+      newErrors.precioVenta
+    ) {
+      setErrors(newErrors);
+      return;
+    }
 
     try {
       await createProduct(formData);
@@ -69,6 +161,7 @@ function ProductForm() {
           value={formData.nombre}
           onChange={handleChange}
           required
+          error={errors.nombre}
         />
 
         <Select
@@ -87,6 +180,7 @@ function ProductForm() {
             },
           ]}
           required
+          error={errors.tipo}
         />
 
         <Input
@@ -96,6 +190,7 @@ function ProductForm() {
           value={formData.precioCosto}
           onChange={handleChange}
           required
+          error={errors.precioCosto}
         />
 
         <Input
@@ -105,6 +200,7 @@ function ProductForm() {
           value={formData.precioVenta}
           onChange={handleChange}
           required
+          error={errors.precioVenta}
         />
 
         <div

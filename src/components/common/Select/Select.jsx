@@ -1,12 +1,11 @@
-function Input({
+function Select({
   label,
   name,
-  type = "text",
-  placeholder = "",
   value,
   onChange,
-  error,
+  options = [],
   required = false,
+  error,
 }) {
   return (
     <div style={{ marginBottom: "16px" }}>
@@ -26,11 +25,9 @@ function Input({
         </label>
       )}
 
-      <input
+      <select
         id={name}
         name={name}
-        type={type}
-        placeholder={placeholder}
         value={value}
         onChange={onChange}
         style={{
@@ -39,8 +36,17 @@ function Input({
           borderRadius: "6px",
           border: error ? "1px solid red" : "1px solid #ccc",
           boxSizing: "border-box",
+          backgroundColor: "white",
         }}
-      />
+      >
+        <option value="">Seleccionar...</option>
+
+        {options.map((option) => (
+          <option key={option.value} value={option.value}>
+            {option.label}
+          </option>
+        ))}
+      </select>
 
       {error && (
         <small
@@ -57,4 +63,4 @@ function Input({
   );
 }
 
-export default Input;
+export default Select;
